@@ -1,15 +1,17 @@
 
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]  // localhost/api/users
-    public class UsersController : ControllerBase
+//     [ApiController]
+//     [Route("api/[controller]")]  // localhost/api/users
+     [Authorize]
+    public class UsersController : BaseApiController
     {   
        //ctor + tab
         private readonly DataContext _context;
@@ -17,6 +19,7 @@ namespace API.Controllers
        {
             _context = context;        
        } 
+       [AllowAnonymous]
        [HttpGet]
        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
        {
