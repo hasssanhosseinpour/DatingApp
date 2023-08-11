@@ -26,13 +26,17 @@ export class NavComponent implements OnInit {
       //there is only one statement so we don't need {} too 
       next: _=> this.router.navigateByUrl("/members"),
   
-      error:error=>this.toastr.error(error.error)
+      error:error=>{
+        this.toastr.error(error.error)
+        // ,console.log(error)
+      }
+      
     })
   }
 
   logout(){
     this.accountService.logout();
-    this.router.navigateByUrl("/");
+    this.router.navigateByUrl("/"); //back to home page
     //this.loggedIn = false;
   }
 }
