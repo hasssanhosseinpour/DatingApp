@@ -1,11 +1,5 @@
-using System.Text;
-using API.Data;
 using API.Extensions;
-using API.Interfaces;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +19,15 @@ builder.Services.AddIdentityServices(builder.Configuration);
 // builder.Services.AddScoped<ITokenService,TokenService>();
 var app = builder.Build();
 
+// //This what we would see if we were using .NET 5. But we don't see it any more from .NET 6 onward.
+// // From .NET 6,it is runnig in back end and thats why we see a long error when we run server-error end point in Postman  
+// if(builder.Environment.IsDevelopment()){
+//     app.UseDeveloperExceptionPage();
+// }
+
 // // Configure the HTTP request pipeline.
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(builder=>builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
 

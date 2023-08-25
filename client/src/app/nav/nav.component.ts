@@ -25,12 +25,8 @@ export class NavComponent implements OnInit {
       //since we don't need the response, we can put _ or ()
       //there is only one statement so we don't need {} too 
       next: _=> this.router.navigateByUrl("/members"),
-  
-      error:error=>{
-        this.toastr.error(error.error)
-        // ,console.log(error)
-      }
-      
+      //Since we created the Interceptor, We don't need the below toastr any more.
+      //error:error=>this.toastr.error(error.error)      
     })
   }
 
