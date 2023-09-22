@@ -16,6 +16,11 @@ namespace API.Extensions
 
             services.AddCors();
             services.AddScoped<ITokenService,TokenService>();
+            // AddScope is in the level of HTTP request
+            //This way they,IUserRepository and UserRepository, are injectable to our UserController
+            services.AddScoped<IUserRepository,UserRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             return services;
         }
     }
